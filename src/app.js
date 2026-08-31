@@ -14,5 +14,15 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("public"))  // "Files inside the public folder can be directly accessed by the browser."
 app.use(cookieParser())  //This middleware helps Express read cookies sent by the browser.
 
+// routes import
+import userRouter from './routes/user.routes.js'
+
+
+//routes declaration
+app.use("/api/v1/users", userRouter)
+
+
+//http://localhost:8000/api/v1/users/register
+
 
 export { app }
