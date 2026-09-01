@@ -54,13 +54,14 @@ const userSchema = new Schema(
 )
 
 //  pre is a hook it menas run just before anyhting happen like we pass save here so just before saving we run pre to encrypt passwrod
-userSchema.pre("save", async function(next) {
-    if(!this.modified("password"))  return next();
+userSchema.pre("save", async function () {
 
-    this.password = await bcrypt.hash(this.password, 10)
-    next()
+    if (!this.isModified("password")) {
+        return;
+    }
 
-})
+    this.password = await bcrypt.hash(this.password, 10);
+});
 
 userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
