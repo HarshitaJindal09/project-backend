@@ -224,12 +224,12 @@ const refreshAccessToken = asyncHandler(async (req, res) =>
             throw new ApiError(401, "Refresh token is expired or used")
                 
         }
-    
+        //Generate new tokens  
         const options = {
             httpOnly: true,
             secure: true
         }
-        
+        //  new accessToken    new refreshToken
         const {accessToken, newRefreshToken} = await generateAccessAndRefereshTokens(user._id)
         
         return res
@@ -249,6 +249,8 @@ const refreshAccessToken = asyncHandler(async (req, res) =>
     }
 
 })
+
+
  
 export {
     registerUser,
